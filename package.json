@@ -1,13 +1,21 @@
 {
-  "name": "Mutant recuruiter",
+  "name": "mutant_recruiter",
+  "description": "Mutant recruiter.",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Ashlamir",
+  "private": true,
   "license": "UNLICENSED",
+  "author": "Ashlamir",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neyhuel/mutant_recruiter.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "deploy": "gcloud app deploy"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1"
