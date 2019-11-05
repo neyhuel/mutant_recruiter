@@ -7,15 +7,16 @@ var mutantController = {};
 var n = 6;
 // Length of mutant nitrogenous base
 var mutant_nb = 4;
-// Quantity of mutant nitrogenous base encountered
-var mutant_dna = 0;
 // Minimun quantity of mutant nitrogenous base
 var min_mutant_nb = 1;
 
 mutantController.isMutant = function(req, res){
   // Variables declarations
-
+  // Quantity of mutant nitrogenous base encountered
+  var mutant_dna = 0;
+  // Human DNA
   var dna = req.body.dna
+  // Control variables
   var i, j;
 
   // Validar que las cadenas estan compuestas por A, T, G o C
