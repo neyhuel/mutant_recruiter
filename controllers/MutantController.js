@@ -1,3 +1,10 @@
+var personService = require('../services/PersonService');
+//
+// const {Datastore} = require('@google-cloud/datastore');
+//
+// // Instantiate a datastore client
+// const datastore = new Datastore();
+
 // Pattern of mutant nitrogenous base
 var pattern = /(A|T|G|C)\1{3}/;
 
@@ -10,7 +17,7 @@ var mutant_nb = 4;
 // Minimun quantity of mutant nitrogenous base
 var min_mutant_nb = 1;
 
-mutantController.isMutant = function(req, res){
+mutantController.isMutant = async function(req, res, next){
   // Variables declarations
   // Quantity of mutant nitrogenous base encountered
   var mutant_dna = 0;
@@ -83,6 +90,27 @@ mutantController.isMutant = function(req, res){
     console.log("¡¡¡Get away from me, homosapiens!!!");
   }
 
+  try {
+    await personService.findByDNA(dna)
+    .then(async (r) => {
+      if(r[0].length == 0){
+        await personService.insertPerson({ dna: dna, isMutant: mutant_dna > min_mutant_nb })
+      }
+    })
+    .catch((e) => { console.log(e); } )
+  } catch (error) {
+    next(error);
+  }
+  // try {
+  //   // base = "";
+  //   // for(var x; x < dna.length; x++){
+  //   //   base += (x == dna.length - 1) ? dna[x] : dna[x] + ',';
+  //   // }
+  // } catch (error) {
+  //   console.log(error);
+  //   res.status(500).send(error.message).end();
+  // }
+
   // Is Mutant?
   if (mutant_dna > min_mutant_nb){
     res.status(200).send('OK').end();
@@ -90,6 +118,34 @@ mutantController.isMutant = function(req, res){
     res.status(403).send('Forbidden').end();
   }
 };
+
+mutantController.stats = async function(req, res, next){
+  let count_mutant;
+  let count_human;
+  let ratio;
+  try {
+    await personService.getMutantsQuantity()
+      .then(async (r) => {
+        console.log(r)
+        count_mutant = r[0].length;
+        await personService.getPersonsQuantity()
+          .then(async (r) => {
+            console.log(r)
+            count_human = r[0].length;
+            var result = {
+              count_mutant_dna: count_mutant,
+              count_human_dna: count_human,
+              ratio: count_mutant/count_human
+            }
+            res.status(200).send(result).end();
+          })
+          .catch((e) => { console.log(e); } )
+      })
+      .catch((e) => { console.log(e); } )
+  } catch (error) {
+    next(error);
+  }
+}
 
 // Support methods
 function forward_diagonal(dna, x, y){
