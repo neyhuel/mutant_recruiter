@@ -41,9 +41,9 @@ La aplicación posee dos endpoints:
   - `/mutant/stats`: devuelve la cantidad de mutantes, humanos y la relacion entre ambos. Solo disponible para la versión Cloud.
 
 ### Mutant
-**URL** : `/mutant`
-**Method** : `POST`
-**Body** :
+- **URL** : `/mutant`
+- **Method** : `POST`
+- **Body** :
 ```json
 {
   "dna":["ATGCGA","AAAAAC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
