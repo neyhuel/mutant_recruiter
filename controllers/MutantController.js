@@ -1,9 +1,4 @@
 var personService = require('../services/PersonService');
-//
-// const {Datastore} = require('@google-cloud/datastore');
-//
-// // Instantiate a datastore client
-// const datastore = new Datastore();
 
 // Pattern of mutant nitrogenous base
 var pattern = /(A|T|G|C)\1{3}/;
@@ -113,9 +108,9 @@ mutantController.isMutant = async function(req, res, next){
 
   // Is Mutant?
   if (mutant_dna > min_mutant_nb){
-    res.status(200).send('OK').end();
+    res.status(200).send({status: 200, message: 'ok'}).end();
   }else{
-    res.status(403).send('Forbidden').end();
+    res.status(403).send({status: 403, message: 'Forbidden'}).end();
   }
 };
 
