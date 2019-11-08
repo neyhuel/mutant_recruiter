@@ -12,7 +12,7 @@ Este sistema recibe la cadena de ADN digitalizada y descifra el código genétic
   - [GCloud SDK (para la version cloud)](https://cloud.google.com/sdk/docs/)
   - Tener una cuenta habilitada en [Google Cloud](https://cloud.google.com/)
 
-# Instalación
+## Instalación
 ### Google Cloud
   1. Instala las herramientas de los requisitos, puedes ayudarte de [esta guía](https://cloud.google.com/appengine/docs/standard/nodejs/quickstart)
   2. Terminado de crear el proyecto en Google App Engine ya podemos clonar el [repositorio](https://github.com/neyhuel/mutant_recruiter) en nuestra PC.
@@ -35,12 +35,12 @@ $ cd mutant_recruiter
 ### Docker
 `$ docker run -p 8000:8000 ashlamir/mutant_recruiter`
 
-# Como usar
+## Como usar
 La aplicación posee dos endpoints:
   - `/mutant/`: recibe una cadena de ADN y responde si es mutante o no.
   - `/mutant/stats`: devuelve la cantidad de mutantes, humanos y la relacion entre ambos. Solo disponible para la versión Cloud.
 
-## Mutant
+### Mutant
 **URL** : `/mutant`
 **Method** : `POST`
 **Body** :
@@ -50,7 +50,7 @@ La aplicación posee dos endpoints:
 }
 ```
 
-### Respuestas
+#### Respuestas
 - **Condition** : Es un mutante.
 - **Code** : `200 OK`
 - **Content** :
@@ -69,11 +69,11 @@ La aplicación posee dos endpoints:
   "message": "Forbidden"
 }
 ```
-## Stats
+### Stats
 - **URL** : `/mutant/stats`
 - **Method** : `GET`
 
-### Respuestas
+#### Respuestas
 - **Condition** : Es un mutante.
 - **Code** : `200 OK`
 - **Content** :
